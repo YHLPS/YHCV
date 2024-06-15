@@ -100,7 +100,8 @@ input, select, textarea {
 
 	body {
 		background-color: #2e3141;
-		background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../../images/bg.jpg");
+		background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), 
+		url("../../assets/images/bg.jpg");
 		background-size: auto,
  cover;
 		background-attachment: fixed,
@@ -359,6 +360,8 @@ input, select, textarea {
 			margin: 4em 0;
 		}
 
+/* Util */
+
 	.align-left {
 		text-align: left;
 	}
@@ -371,7 +374,124 @@ input, select, textarea {
 		text-align: right;
 	}
 
-/* Row */
+	.flex-row { 
+		flex-direction: row;
+		align-items: center;
+		display: flex;
+	}
+
+	.flex-col { 
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-items: center;
+		width: auto;
+		display: flex;
+	}	
+
+	.flex-content-start { 
+		align-items: center;
+		align-self: flex-start;
+		align-content: start;
+		place-content: start;
+	}
+
+	@media screen and (min-width: 1280px) {
+		.list .margin-start {
+			margin-left: 70px;
+		}
+	
+	}
+
+	@media screen and (max-width: 1280px) {
+		.list .margin-start {
+			margin-left: 55px;
+		}
+	
+	}
+
+
+	@media screen and (max-width: 736px) {
+		.list .margin-start {
+			margin-left: 40px;
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		.list .margin-start {
+			margin-left: 30px;
+		}
+	}
+
+	@media screen and (max-width: 360px) {
+		.list .margin-start {
+			margin-left: 20px;
+		}
+	}
+
+	.min-width-content { 
+		min-width: max-content;
+	}
+
+	.font-size-125 {
+		font-size: 125%;
+	}
+
+	.list li {
+		margin-bottom: -10px;
+	}
+
+	.list li.js object {
+		max-width: 50px
+	}
+
+	.list li.ts object {
+		max-width: 60px;
+		margin-left: -5px;
+    	margin-right: -5px;
+	}
+	
+	.list li.ng object {
+		max-width: 50px;
+	}
+
+	.list li.react object {
+		max-width: 50px;
+	}
+
+	.list li.dot-net object {
+		max-width: 70px;
+		margin-left: -10px;
+    	margin-right: -10px;
+	}
+
+	.list li.node object {
+		max-width: 70px;
+		margin-left: -10px;
+    	margin-right: -10px;
+	}
+
+	.list li.csharp object {
+		max-width: 70px;
+		margin-left: -10px;
+    	margin-right: -10px;
+	}
+	
+	sub.small {
+		border-width: 1px;
+		border-color: white;
+		opacity: 27%;
+		border-style: dotted;
+		padding: 3px 18px;
+		border-radius: 42%;
+	}
+
+	.btn-in-text {
+		padding: 1px 6px;
+    	margin-left: 6px;
+    	margin-right: 6px;
+	}
+	
+	/* Row */
 
 	.row {
 		display: flex;
@@ -3325,8 +3445,18 @@ input, select, textarea {
 
 				#menu .links li a {
 					border-radius: 5px;
+					justify-content: space-evenly;
+					align-self: center;
 					border: 0;
-					display: block;
+					flex-direction: row;
+					margin-left: auto;
+					margin-right: auto;
+					flex-wrap: wrap;
+					align-items: center;
+					width: auto;
+					max-width: 80%;
+					align-content: space-between;
+					display: flex;
 					font-family: Raleway, Helvetica, sans-serif;
 					font-size: 0.8em;
 					font-weight: 200;
@@ -3466,7 +3596,8 @@ input, select, textarea {
 			#banner {
 				padding: 7em 0 8.25em 0 ;
 				background-color: #2e3141;
-				background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../../images/bg.jpg");
+				background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), 
+				url("../../assets/images/bg.jpg");
 				background-size: auto,
  cover;
 				background-position: center,
@@ -3578,7 +3709,8 @@ input, select, textarea {
 		#wrapper > header {
 			padding: 9em 0 6.25em 0 ;
 			background-color: #2e3141;
-			background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../../images/bg.jpg");
+			background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), 
+			url("../../assets/images/bg.jpg");
 			background-size: auto,
  cover;
 			background-position: center,
@@ -3820,7 +3952,6 @@ input, select, textarea {
 				-webkit-flex-direction: row-reverse;
 				-ms-flex-direction: row-reverse;
 				flex-direction: row-reverse;
-				text-align: center;
 			}
 
 			.wrapper.spotlight:nth-child(2n - 1) .image {
@@ -4071,7 +4202,8 @@ input, select, textarea {
 
 		#footer {
 			background-color: #2e3141;
-			background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), url("../../images/bg.jpg");
+			background-image: linear-gradient(to top, rgba(46, 49, 65, 0.8), rgba(46, 49, 65, 0.8)), 
+			url("../../assets/images/bg.jpg");
 			background-size: auto,
  cover;
 			background-position: center,

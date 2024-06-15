@@ -584,4 +584,19 @@
 
 	};
 
+	$.scrollTo = function($elementSelector = "#elementtoScrollToID") {
+		var $element = $($elementSelector),
+			elementTop = $element.offset().top,
+			documentOffset = 60;
+
+		console.log('element.offset', elementTop);
+
+		$([document.documentElement, document.body]).animate({
+			scrollTop: elementTop > documentOffset ? elementTop - documentOffset: 0
+		}, 900);
+	}
+
+
+	
+
 })(jQuery);
