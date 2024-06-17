@@ -43,8 +43,10 @@
 	}
 
 	// Menu.
+	// refactor by menu element: functions, events.
 	var $menu = $('#menu');
 
+	// refactor by menu element, functions:
 	$menu._locked = false;
 
 	$menu._lock = function () {
@@ -83,6 +85,7 @@
 
 	};
 
+	// refactor by menu element, events:
 	$menu
 		.appendTo($body)
 		.on('click', function (event) {
@@ -136,6 +139,7 @@
 		})
 		.on('keydown', function (event) {
 
+			alert(event.keyCode);
 			// Hide on escape.
 			if (event.keyCode == 27)
 				$menu._hide();
