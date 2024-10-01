@@ -6,6 +6,10 @@ const mainPic = `data:image/jpeg;base64,/9j/4gIcSUNDX1BST0ZJTEUAAQEAAAIMbGNtcwIQ
 const mainPicElem = document.querySelector('#mainPic');
 mainPicElem.src = mainPic;
 
+// set in link[rel="icon"]
+const mainPicIcon = document.querySelector('link[rel="icon"]');
+mainPicIcon.href = mainPic;
+
 // set in metaTags
 const metaTags = document.createDocumentFragment();
 
