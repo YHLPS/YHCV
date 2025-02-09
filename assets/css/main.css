@@ -3413,6 +3413,7 @@ input, select, textarea {
 			position: relative;
 			width: 18em;
 			overflow-y: auto;
+			max-height: 100%;
 		}
 
 		.menu-screen h2 {
