@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קורות חיים מקצועיים - יותם חסין</title>
+    <script src="https://cdn.jsdelivr.net/npm/docx@9.5.1/dist/index.iife.min.js"></script>
+    <script src="https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>לחץ על הכפתור כדי ליצור קובץ קורות חיים משופר</h1>
+    <button id="generateCVButton">צור קובץ DOCX</button>
+
+    <script>
+        const { Document, Packer, 
+            Table, TableRow, TableCell, 
+            Paragraph, TextRun, HeadingLevel, 
+            AlignmentType, Spacing, BorderStyle } = docx;
+
+        async function createCV() {
+            const mainTitle = [
+                new Paragraph({
+                    text: "יותם חסין",
+                    alignment: AlignmentType.CENTER,
+                    heading: HeadingLevel.TITLE,
+                }),
+                new Paragraph({
+                    text: "מפתח Full-Stack | .NET | React | Node.js",
+                    alignment: AlignmentType.CENTER,
+                    spacing: { after: 150 },
+                })
+            ];
+
+            const doc = new Document({
+                sections: [
+                    {
+                        children: [
+                            new Paragraph({
+                                bidirectional: true,
+                                alignment: AlignmentType.CENTER,
+                                children: [
+                                    new TextRun({
+                                        text: "שלום עולם",
+                                        rightToLeft: true,
+                                    }),
+                                ],
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({
+                                        text: "שלום עולם",
+                                        bold: true,
+                                        rightToLeft: true,
+                                    }),
+                                ],
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({
+                                        text: "שלום עולם",
+                                        italics: true,
+                                        rightToLeft: true,
+                                    }),
+                                ],
+                            }),
+                            new Table({
+                                visuallyRightToLeft: true,
+                                rows: [
+                                    new TableRow({
+                                        children: [
+                                            new TableCell({
+                                                children: [new Paragraph("שלום עולם")],
+                                            }),
+                                            new TableCell({
+                                                children: [],
+                                            }),
+                                        ],
+                                    }),
+                                    new TableRow({
+                                        children: [
+                                            new TableCell({
+                                                children: [],
+                                            }),
+                                            new TableCell({
+                                                children: [new Paragraph("שלום עולם")],
+                                            }),
+                                        ],
+                                    }),
+                                ],
+                            }),
+                        ],
+                    },
+                ],
+            });
+
+            Packer.toBlob(doc).then((blob) => {
+                saveAs(blob, "קורות חיים - יותם חסין (משופר).docx");
+            });
+        }
+
+        const button = document.getElementById("generateCVButton");
+        button.addEventListener("click", createCV);
+    </script>
+
+</body>
+
+</html>

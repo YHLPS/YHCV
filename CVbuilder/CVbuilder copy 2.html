@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קורות חיים מקצועיים - יותם חסין</title>
+    <script src="https://cdn.jsdelivr.net/npm/docx@9.5.1/dist/index.iife.min.js"></script>
+    <script src="https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>לחץ על הכפתור כדי ליצור קובץ קורות חיים משופר</h1>
+    <button id="generateCVButton">צור קובץ DOCX</button>
+
+    <script>
+        const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } = docx;
+
+        async function createCV() {
+            const doc = new Document({
+                sections: [
+                    {
+                        children: [
+                            // כותרת ראשית: שם ותפקיד
+                            new Paragraph({
+                                text: "יותם חסין",
+                                alignment: AlignmentType.CENTER,
+                                heading: HeadingLevel.TITLE,
+                            }),
+                            new Paragraph({
+                                text: "מפתח Full-Stack | .NET | React | Node.js",
+                                alignment: AlignmentType.CENTER,
+                                heading: HeadingLevel.HEADING_1,
+                                spacing: { after: 150 },
+                            }),
+                            
+                            // פרופיל אישי
+                            new Paragraph({
+                                text: "פרופיל אישי",
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun("מפתח מסור, חרוץ וידידותי, עם ניסיון של מעל 10 שנים בפיתוח מערכות אינטרנט מקצה לקצה. מומחה בפיתוח צד לקוח עם React ו-Angular, ובפיתוח צד שרת עם .NET Core ו-Node.js. בעל יכולות התחברות חיובית עם עמיתים "),
+                                    [cite_start]new TextRun("[cite: 1, 2, 3]").size(16),
+                                    new TextRun(" ושואף תמיד לרכוש ידע ויכולות חדשות בכל תחומי הפיתוח. מחויב לספק שירות איכותי ובעל יכולת עבודה תחת לחץ "),
+                                    [cite_start]new TextRun("[cite: 1, 11, 92]").size(16),
+                                    new TextRun(".")
+                                ],
+                                spacing: { after: 200 },
+                            }),
+
+                            // ניסיון תעסוקתי
+                            new Paragraph({
+                                text: "ניסיון תעסוקתי",
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                text: "מפתח Full-Stack - חברת 365Scores | 2021-2022",
+                                bold: true,
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("פיתוח Full-Stack עם התמקדות בפיתוח React לצד הלקוח, ניהול State באמצעות Redux ופיתוח מונחה קומפוננטות (CDD) "),
+                                    [cite_start]new TextRun("[cite: 18, 94, 95]").size(16),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("עבודה מול שרת ה-.Net Core בארכיטקטורת MVC (Blazor), שימוש ב-APIControllers וניהול בסיסי נתונים ומאגרי מידע (SQL & NoSQL) "),
+                                    [cite_start]new TextRun("[cite: 19, 20, 96]").size(16),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                text: "מפתח עצמאי - פרילאנס | 2017-2021",
+                                bold: true,
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("פיתוח מערכות אינטרנט מלאות מקצה לקצה, כולל עבודה מול מעצבים (Client side) ומנהלי בסיסי נתונים (Server side) "),
+                                    [cite_start]new TextRun("[cite: 25, 98]").size(16),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                text: "מפתח Client - חברת "מטריקס" | 2016-2017",
+                                bold: true,
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("פיתוח עבור רשות התקשוב הממשלתי (ממשל זמין) באמצעות טכנולוגיות צד לקוח כגון: HTML5, TypeScript, JavaScript, CSS3, Angular ו-React "),
+                                    [cite_start]new TextRun("[cite: 27, 28, 102, 103, 104, 105]").size(16),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("יישום SPA (Single Page Applications) ושימוש בתקשורת א-סינכרונית (AJAX) מול שרתי .NET ו-Node.js "),
+                                    [cite_start]new TextRun("[cite: 32, 33, 34, 106, 107, 108]").size(16),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                text: "מפתח - חברת "אלעד מערכות" | 2015-2016",
+                                bold: true,
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("מפתח .Net ברשות מקרקעי ישראל: פיתוח עם טכנולוגיות צד שרת מתקדמות כמו ASP.Net MVC5 ו-Entity Framework, תוך דגש על ארכיטקטורת שכבות וצימוד נמוך "),
+                                    [cite_start]new TextRun("[cite: 38, 124, 133]").size(16),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("פיתוח צד לקוח עם jqxWidget, Knockout.JS ו-jQuery בסביבת SharePoint "),
+                                    [cite_start]new TextRun("[cite: 39, 125, 134]").size(16),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("פרויקט במשרה מלאה במשרד החינוך תוך שימוש ב-ASP.Net MVC5, Entity Framework, AngularJS ו-Bootstrap "),
+                                    [cite_start]new TextRun("[cite: 40, 41, 126, 135]").size(16),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                text: "מתכנת מתחיל - | 2014-2015",
+                                bold: true,
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("מתכנת Full Stack .NET בצוות קטן, לקח חלק מרכזי בפיתוח מערכת עבור מעל 10,000 לקוחות פעילים "),
+                                    [cite_start]new TextRun("[cite: 43, 128, 137]").size(16),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "• " }),
+                                    new TextRun("עבודות פרילאנס בתכנות .NET, כולל WebForms, MVC, WCF, WinForms ו-WPF "),
+                                    [cite_start]new TextRun("[cite: 44, 129, 138]").size(16),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+
+                            // כישורים טכניים
+                            new Paragraph({
+                                text: "כישורים טכניים",
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "שפות:", bold: true }),
+                                    new TextRun(" C#, JavaScript, TypeScript "),
+                                    [cite_start]new TextRun("[cite: 58, 146, 157]").size(16),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "צד לקוח (Frontend):", bold: true }),
+                                    new TextRun(" JavaScript, TypeScript, Angular, React, Redux, Sass, HTML5, CSS3, Flex, Bootstrap "),
+                                    [cite_start]new TextRun("[cite: 18, 28, 32, 35, 56, 95, 104, 105, 109, 142, 153]").size(16),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "צד שרת (Backend):", bold: true }),
+                                    new TextRun(" .Net, Node.js "),
+                                    [cite_start]new TextRun("[cite: 34, 57, 108, 144, 155]").size(16),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "בסיסי נתונים:", bold: true }),
+                                    new TextRun(" SQL, NoSQL, Entity Framework "),
+                                    [cite_start]new TextRun("[cite: 20, 38, 96, 124, 126, 133, 135]").size(16),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "ארכיטקטורה ומתודולוגיות:", bold: true }),
+                                    new TextRun(" פיתוח ריאקטיבי (RxJs, Ramada), פיתוח מונחה עצמים (OOP), ארכיטקטורת MVC, CDD, SPA "),
+                                    [cite_start]new TextRun("[cite: 18, 19, 32, 59, 60, 95, 105, 106, 147, 148, 149, 150, 158, 159, 160, 161]").size(16),
+                                ],
+                                spacing: { after: 300 },
+                            }),
+                            
+                            // השכלה
+                            new Paragraph({
+                                text: "השכלה",
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "מכללת ג'ון ברייס:", bold: true }),
+                                ],
+                            }),
+                            new Paragraph({
+                                text: "• מצטיין קורס מתכנתי .Net 4.5 Framework (618 שעות לימוד) "),
+                                [cite_start]new TextRun("[cite: 63, 64, 165, 166]").size(16),
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "רשות התקשוב הממשלתית:", bold: true }),
+                                ],
+                            }),
+                            new Paragraph({
+                                text: "• קורס Angular מתקדם ומעשי, כולל הכשרת TypeScript "),
+                                [cite_start]new TextRun("[cite: 66, 67, 68, 168, 169, 170]").size(16),
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "האוניברסיטה העברית:", bold: true }),
+                                ],
+                            }),
+                            new Paragraph({
+                                text: "• מכינה קדם אקדמית, התמחות בכלכלה וסטטיסטיקה, סיום בממוצע 92.2 "),
+                                [cite_start]new TextRun("[cite: 70, 172, 173]").size(16),
+                                spacing: { after: 300 },
+                            }),
+
+                            // פרויקטים ופורטפוליו
+                            new Paragraph({
+                                text: "פרויקטים ופורטפוליו",
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "דף אישי (קורות חיים):", bold: true }),
+                                    new TextRun({ text: " https://yhlps.github.io/YHCV", link: "https://yhlps.github.io/YHCV" }),
+                                    [cite_start]new TextRun("[cite: 74, 178, 186]").size(16),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "POC להדגמת עיקרון ה-Chain:", bold: true }),
+                                    new TextRun({ text: " https://my-math.netlify.app", link: "https://my-math.netlify.app" }),
+                                    [cite_start]new TextRun("[cite: 76, 179, 187]").size(16),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "חבילות NPM:", bold: true }),
+                                    new TextRun(" Enquirer Helper, UI Helper, Config File Helper "),
+                                    [cite_start]new TextRun("[cite: 83, 85, 87, 183, 184, 185, 191, 192, 193]").size(16),
+                                ],
+                                spacing: { after: 300 },
+                            }),
+
+                            // שפות
+                            new Paragraph({
+                                text: "שפות",
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "עברית: ", bold: true }),
+                                    new TextRun("שפת אם - שליטה מצוינת "),
+                                    [cite_start]new TextRun("[cite: 29, 119]").size(16),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun({ text: "אנגלית: ", bold: true }),
+                                    new TextRun("כשפת אם - שליטה מצוינת "),
+                                    [cite_start]new TextRun("[cite: 31, 121]").size(16),
+                                ],
+                                spacing: { after: 300 },
+                            }),
+
+                        ],
+                    },
+                ],
+            });
+
+            Packer.toBlob(doc).then((blob) => {
+                saveAs(blob, "קורות חיים - יותם חסין (משופר).docx");
+            });
+        }
+
+        const button = document.getElementById("generateCVButton");
+        button.addEventListener("click", createCV);
+    </script>
+
+</body>
+</html>

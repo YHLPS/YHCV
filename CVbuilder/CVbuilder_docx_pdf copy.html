@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצירת קורות חיים - DOCX ו-PDF</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/docx@9.5.1/dist/index.iife.min.js"></script>
+    <script src="https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.7/build/pdfmake.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.7/build/vfs_fonts.min.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            margin: 10px;
+        }
+        #generateDocxButton {
+            background-color: #007bff;
+        }
+        #generatePdfButton {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>בחר פורמט ליצירת קורות החיים</h1>
+    <a href="https://gemini.google.com/app/a8dc9c98eaad6262">gemini.google</a>
+    <button id="generateDocxButton">צור קובץ DOCX</button>
+    <button id="generatePdfButton">צור קובץ PDF</button>
+
+    <script>
+        // שימוש באובייקטים של ספריית docx
+        const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Spacing, BorderStyle } = docx;
+
+        // הפונט העברי עבור pdfmake
+        pdfMake.fonts = {
+            /* NotoSansHebrew: {
+                normal: 'https://fonts.gstatic.com/s/notosanshebrew/v19/H4c4BWz-K7I4C_JpZJqI-oKqjN4y_yHhY_zK_VbY_u_b.woff',
+                bold: 'https://fonts.gstatic.com/s/notosanshebrew/v19/H4c4BWz-K7I4C_JpZJqI-oKqjN4y_yHhY_zK_VbY_u_b.woff',
+            } */
+           NotoSansHebrew: {
+                normal: 'https://fonts.gstatic.com/s/notosanshebrew/v49/or30Q7v33eiDljA1IufXTtVf7V6RvEEdhQlk0LlGxCyaePiZTNzENg.woff2',
+                bold: 'https://fonts.gstatic.com/s/notosanshebrew/v49/or30Q7v33eiDljA1IufXTtVf7V6RvEEdhQlk0LlGxCyaePiZTNzENg.woff2',
+            }
+        };
+
+        // מקור הנתונים המשותף לשני המסמכים
+        const cvData = {
+            name: "יותם חסין",
+            title: "מפתח Full-Stack | .NET | React | Node.js",
+            contact: {
+                phone: "050-4030944",
+                email: "yotamhassin@gmail.com",
+                website: "https://yhlps.github.io/YHCV/"
+            },
+            summary: "מפתח Full-Stack מנוסה עם מעל עשור של ניסיון בבניית מערכות אינטרנט מקצה לקצה. מומחה בפיתוח צד-לקוח (React, Angular) ובצד-שרת (.NET, Node.js). מביא איתו יכולת למידה מהירה, פתרון בעיות מורכבות ומחויבות גבוהה לאיכות קוד ולארכיטקטורה יעילה. ניסיון רב בעבודה בצוותים פיתוח עם יכולות תקשורת מצויינות.",
+            experience: [
+                {
+                    title: "מפתח Full-Stack | חברת 365Scores | 2021-2022",
+                    bullets: [
+                        "פיתוח עם React, Redux ופיתוח מונחה קומפוננטות (CDD).",
+                        "עבודה מול שרת .Net Core בארכיטקטורת MVC ושימוש ב-APIControllers.",
+                    ]
+                },
+                {
+                    title: "מפתח עצמאי (פרילאנס) | 2017-2021",
+                    bullets: [
+                        "פיתוח מערכות אינטרנט מלאות מקצה לקצה, כולל עבודה מול מעצבים (Client-side) ומנהלי בסיסי נתונים (Server-side).",
+                    ]
+                },
+                {
+                    title: `מפתח Client | חברת "מטריקס" | 2016-2017`,
+                    bullets: [
+                        `פיתוח עבור רשות התקשוב הממשלתי (ממשל זמין) באמצעות Angular, React, HTML5, TypeScript, JavaScript ו-CSS3.`,
+                    ]
+                },
+                {
+                    title: `מפתח .NET | חברת "אלעד מערכות" | 2015-2016`,
+                    bullets: [
+                        `פיתוח עבור רשות מקרקעי ישראל ומשרד החינוך. שימוש בטכנולוגיות ASP.Net MVC5, Entity Framework, AngularJS, jQuery.`,
+                    ]
+                },
+                {
+                    title: `מתכנת Full Stack .NET | 2014-2015`,
+                    bullets: [
+                        "פיתוח מערכת עבור מעל ל-10,000 לקוחות וביצוע עבודות פרילאנס בתכנות .NET.",
+                    ]
+                }
+            ],
+            skills: [
+                { category: "שפות", list: "C#, JavaScript, TypeScript" },
+                { category: "צד-לקוח", list: "React, Angular, Redux, HTML5, CSS3, Sass" },
+                { category: "צד-שרת", list: ".NET, Node.js" },
+                { category: "בסיסי נתונים", list: "SQL, NoSQL, Entity Framework" },
+                { category: "מתודולוגיות", list: "OOP, MVC, CDD, SPA, פיתוח ריאקטיבי (RxJs)" }
+            ],
+            education: [
+                { institution: "מכללת ג'ון ברייס", description: "מצטיין קורס .Net 4.5 Framework" },
+                { institution: "רשות התקשוב הממשלתית", description: "קורס Angular מתקדם" },
+                { institution: "האוניברסיטה העברית", description: "מכינה קדם אקדמית, סיום בממוצע 92.2" },
+            ]
+        };
+
+        // פונקציה ליצירת קובץ DOCX
+        function createDocx() {
+            const children = [
+                new Paragraph({
+                    bidirectional: true,
+                    text: cvData.name,
+                    alignment: AlignmentType.CENTER,
+                    heading: HeadingLevel.TITLE,
+                }),
+                new Paragraph({
+                    bidirectional: true,
+                    text: cvData.title,
+                    alignment: AlignmentType.CENTER,
+                    spacing: { after: 150 },
+                }),
+                new Paragraph({
+                    bidirectional: true,
+                    alignment: AlignmentType.CENTER,
+                    children: [
+                        new TextRun({ text: `טלפון: ${cvData.contact.phone} `, bold: true, rightToLeft: true }),
+                        new TextRun({ text: "|", rightToLeft: false }),
+                        new TextRun({ text: ` דוא"ל: ${cvData.contact.email} `, bold: true, rightToLeft: true }),
+                        new TextRun({ text: "|", rightToLeft: false }),
+                        new TextRun({ text: " אתר: ", bold: true, rightToLeft: true }),
+                        new TextRun({ text: `${cvData.contact.website}`, link: cvData.contact.website, rightToLeft: false }),
+                    ],
+                    spacing: { after: 300 },
+                }),
+                new Paragraph({
+                    bidirectional: true,
+                    text: "פרופיל מקצועי",
+                    alignment: AlignmentType.RIGHT,
+                    heading: HeadingLevel.HEADING_2,
+                    border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                    spacing: { before: 200, after: 100 },
+                }),
+                new Paragraph({
+                    bidirectional: true,
+                    text: cvData.summary,
+                    spacing: { after: 300 },
+                }),
+                new Paragraph({
+                    bidirectional: true,
+                    text: "ניסיון תעסוקתי",
+                    alignment: AlignmentType.RIGHT,
+                    heading: HeadingLevel.HEADING_2,
+                    border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                    spacing: { before: 200, after: 100 },
+                }),
+            ];
+
+            cvData.experience.forEach(job => {
+                children.push(
+                    new Paragraph({
+                        bidirectional: true,
+                        children: [
+                            new TextRun({ text: job.title, bold: true, rightToLeft: true }),
+                        ],
+                    })
+                );
+                job.bullets.forEach(bullet => {
+                    children.push(
+                        new Paragraph({
+                            bidirectional: true,
+                            children: [
+                                new TextRun({ text: `• ${bullet}`, rightToLeft: true }),
+                            ],
+                            spacing: { after: 100 },
+                        })
+                    );
+                });
+                children.push(new Paragraph({ text: "", spacing: { after: 100 } })); // רווח בין משרות
+            });
+
+            children.push(
+                new Paragraph({
+                    bidirectional: true,
+                    text: "כישורים טכניים",
+                    alignment: AlignmentType.RIGHT,
+                    heading: HeadingLevel.HEADING_2,
+                    border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                    spacing: { before: 200, after: 100 },
+                })
+            );
+            cvData.skills.forEach(skill => {
+                children.push(
+                    new Paragraph({
+                        bidirectional: true,
+                        children: [
+                            new TextRun({ text: `${skill.category}: `, bold: true, rightToLeft: true }),
+                            new TextRun({ text: skill.list, rightToLeft: false }),
+                        ],
+                        spacing: { after: 100 },
+                    })
+                );
+            });
+
+            children.push(
+                new Paragraph({
+                    bidirectional: true,
+                    text: "השכלה והסמכות",
+                    alignment: AlignmentType.RIGHT,
+                    heading: HeadingLevel.HEADING_2,
+                    border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                    spacing: { before: 200, after: 100 },
+                })
+            );
+            cvData.education.forEach(edu => {
+                children.push(
+                    new Paragraph({
+                        bidirectional: true,
+                        children: [
+                            new TextRun({ text: `${edu.institution}:`, bold: true, rightToLeft: true }),
+                            new TextRun({ text: ` ${edu.description}`, rightToLeft: true }),
+                        ],
+                        spacing: { after: 100 },
+                    })
+                );
+            });
+            children.push(new Paragraph({ text: "", spacing: { after: 300 } }));
+
+            const doc = new Document({ sections: [{ children }] });
+            Packer.toBlob(doc).then((blob) => {
+                saveAs(blob, "קורות חיים - יותם חסין.docx");
+            });
+        }
+
+        // פונקציה ליצירת קובץ PDF
+        function createPdf() {
+            const docDefinition = {
+                content: [
+                    { text: cvData.name, style: 'header' },
+                    { text: cvData.title, style: 'subheader' },
+                    { text: cvData.contact.phone, alignment: 'center', margin: [0, 5] },
+                    { text: cvData.contact.email, alignment: 'center', margin: [0, 5] },
+                    { text: cvData.contact.website, alignment: 'center', margin: [0, 5], link: cvData.contact.website, color: 'blue' },
+                    
+                    { text: 'פרופיל מקצועי', style: 'sectionHeader', margin: [0, 20, 0, 5] },
+                    { text: cvData.summary, style: 'body' },
+                    
+                    { text: 'ניסיון תעסוקתי', style: 'sectionHeader', margin: [0, 20, 0, 5] },
+                    ...cvData.experience.map(job => [
+                        { text: job.title, style: 'jobTitle', margin: [0, 10, 0, 0] },
+                        { ul: job.bullets, style: 'body', margin: [10, 0, 0, 0] }
+                    ]),
+
+                    { text: 'כישורים טכניים', style: 'sectionHeader', margin: [0, 20, 0, 5] },
+                    ...cvData.skills.map(skill => (
+                        { text: `${skill.category}: ${skill.list}`, style: 'body', margin: [0, 5, 0, 0] }
+                    )),
+                    
+                    { text: 'השכלה והסמכות', style: 'sectionHeader', margin: [0, 20, 0, 5] },
+                    ...cvData.education.map(edu => (
+                        { text: `${edu.institution}: ${edu.description}`, style: 'body', margin: [0, 5, 0, 0] }
+                    )),
+                ],
+                styles: {
+                    header: { fontSize: 24, bold: true, alignment: 'center' },
+                    subheader: { fontSize: 18, alignment: 'center', margin: [0, 0, 0, 20] },
+                    sectionHeader: { fontSize: 16, bold: true, alignment: 'right', decoration: 'underline' },
+                    jobTitle: { fontSize: 14, bold: true, alignment: 'right' },
+                    body: { fontSize: 12, alignment: 'right' },
+                },
+                defaultStyle: {
+                    font: 'NotoSansHebrew', // שימוש בפונט שהגדרנו
+                    alignment: 'right', // יישור כללי לימין
+                },
+            };
+
+            pdfMake.createPdf(docDefinition).download("קורות חיים - יותם חסין.pdf");
+        }
+
+        document.getElementById("generateDocxButton").addEventListener("click", createDocx);
+        document.getElementById("generatePdfButton").addEventListener("click", createPdf);
+    </script>
+
+</body>
+</html>

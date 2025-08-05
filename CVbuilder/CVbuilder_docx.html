@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קורות חיים מקצועיים - יותם חסין</title>
+    <script src="https://cdn.jsdelivr.net/npm/docx@9.5.1/dist/index.iife.min.js"></script>
+    <script src="https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        p {
+            direction: rtl; /* כדי להבטיח יישור נכון של כל הטקסט */
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>לחץ על הכפתור כדי ליצור קובץ קורות חיים</h1>
+    <button id="generateCVButton">צור קובץ DOCX</button>
+    
+    <p>
+        <br>
+        הערה: המרה ל-PDF אינה נתמכת באופן פשוט בצד הלקוח.
+        <br>
+        קובץ ה-DOCX יורד למחשב שלך וניתן להמיר אותו ידנית ל-PDF באמצעות Word.
+    </p>
+
+    <script>
+        const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Spacing, BorderStyle } = docx;
+
+        async function createCV() {
+            const doc = new Document({
+                sections: [
+                    {
+                        children: [
+                            // כותרת ראשית: שם
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "יותם חסין",
+                                alignment: AlignmentType.CENTER,
+                                heading: HeadingLevel.TITLE,
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "מפתח Full-Stack | .NET | React | Node.js",
+                                alignment: AlignmentType.CENTER,
+                                spacing: { after: 150 },
+                            }),
+                            
+                            // פרטי יצירת קשר
+                            new Paragraph({
+                                bidirectional: true,
+                                alignment: AlignmentType.CENTER,
+                                children: [
+                                    new TextRun({ text: "טלפון: 050-4030944 ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "|", rightToLeft: false }),
+                                    new TextRun({ text: ` דוא"ל: yotamhassin@gmail.com `, bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "|", rightToLeft: false }),
+                                    new TextRun({ text: " אתר: ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "https://yhlps.github.io/YHCV/", link: "https://yhlps.github.io/YHCV/", rightToLeft: false }),
+                                ],
+                                spacing: { after: 300 },
+                            }),
+
+                            // פרופיל מקצועי
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "פרופיל מקצועי",
+                                alignment: AlignmentType.RIGHT,
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "מפתח Full-Stack מנוסה עם מעל עשור של ניסיון בבניית מערכות אינטרנט מקצה לקצה. מומחה בפיתוח צד-לקוח (React, Angular) ובצד-שרת (.NET, Node.js). מביא איתו יכולת למידה מהירה, פתרון בעיות מורכבות ומחויבות גבוהה לאיכות קוד ולארכיטקטורה יעילה. ניסיון רב בעבודה בצוותים פיתוח עם יכולות תקשורת מצויינות.",
+                                spacing: { after: 300 },
+                            }),
+
+                            // ניסיון תעסוקתי
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "ניסיון תעסוקתי",
+                                alignment: AlignmentType.RIGHT,
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "מפתח Full-Stack | חברת ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "365Scores", bold: true, rightToLeft: false }),
+                                    new TextRun({ text: " | 2021-2022", bold: true, rightToLeft: true }),
+                                ],
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "• פיתוח עם React, Redux ופיתוח מונחה קומפוננטות ", rightToLeft: true }),
+                                    new TextRun({ text: "(CDD)", rightToLeft: false }),
+                                    new TextRun({ text: ". עבודה מול שרת .Net Core בארכיטקטורת MVC ושימוש ב-APIControllers.", rightToLeft: true }),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "מפתח עצמאי (פרילאנס) | 2017-2021",
+                                bold: true,
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "• פיתוח מערכות אינטרנט מלאות מקצה לקצה, כולל עבודה מול מעצבים (Client-side) ומנהלי בסיסי נתונים (Server-side).",
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: `מפתח Client | חברת "מטריקס" | 2016-2017`, bold: true, rightToLeft: true }),
+                                ],
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: `• פיתוח עבור רשות התקשוב הממשלתי (ממשל זמין) באמצעות `, rightToLeft: true }),
+                                    new TextRun({ text: "Angular, React, HTML5, TypeScript, JavaScript", rightToLeft: false }),
+                                    new TextRun({ text: ` ו-`, rightToLeft: true }),
+                                    new TextRun({ text: "CSS3.", rightToLeft: false }),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: `מפתח .NET | חברת "אלעד מערכות" | 2015-2016`, bold: true, rightToLeft: true }),
+                                ],
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "• פיתוח עבור רשות מקרקעי ישראל ומשרד החינוך. שימוש בטכנולוגיות ", rightToLeft: true }),
+                                    new TextRun({ text: "ASP.Net MVC5, Entity Framework, AngularJS, jQuery.", rightToLeft: false }),
+                                ],
+                                spacing: { after: 200 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                text: `מתכנת Full Stack .NET | 2014-2015`,
+                                bold: true,
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "• פיתוח מערכת עבור מעל ל-10,000 לקוחות וביצוע עבודות פרילאנס בתכנות .NET.",
+                                spacing: { after: 300 },
+                            }),
+
+                            // כישורים טכניים
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "כישורים טכניים",
+                                alignment: AlignmentType.RIGHT,
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "שפות: ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "C#, JavaScript, TypeScript", rightToLeft: false }),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "צד-לקוח: ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "React, Angular, Redux, HTML5, CSS3, Sass", rightToLeft: false }),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "צד-שרת: ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: ".NET, Node.js", rightToLeft: false }),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "בסיסי נתונים: ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "SQL, NoSQL, Entity Framework", rightToLeft: false }),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "מתודולוגיות: ", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: "OOP, MVC, CDD, SPA, פיתוח ריאקטיבי (RxJs)", rightToLeft: false }),
+                                ],
+                                spacing: { after: 300 },
+                            }),
+
+                            // השכלה
+                            new Paragraph({
+                                bidirectional: true,
+                                text: "השכלה והסמכות",
+                                alignment: AlignmentType.RIGHT,
+                                heading: HeadingLevel.HEADING_2,
+                                border: { bottom: { size: 12, value: "auto", color: "000000" } },
+                                spacing: { before: 200, after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "מכללת ג'ון ברייס:", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: " מצטיין קורס .Net 4.5 Framework", rightToLeft: true }),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "רשות התקשוב הממשלתית:", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: " קורס Angular מתקדם", rightToLeft: true }),
+                                ],
+                                spacing: { after: 100 },
+                            }),
+                            new Paragraph({
+                                bidirectional: true,
+                                children: [
+                                    new TextRun({ text: "האוניברסיטה העברית:", bold: true, rightToLeft: true }),
+                                    new TextRun({ text: " מכינה קדם אקדמית, סיום בממוצע 92.2", rightToLeft: true }),
+                                ],
+                                spacing: { after: 300 },
+                            }),
+                        ],
+                    },
+                ],
+            });
+
+            Packer.toBlob(doc).then((blob) => {
+                saveAs(blob, "קורות חיים - יותם חסין (משופר).docx");
+            });
+        }
+
+        const button = document.getElementById("generateCVButton");
+        button.addEventListener("click", createCV);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יצירת מסמך Word</title>
+    <!-- <script src="https://unpkg.com/docx@8.2.3/build/index.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/docx@9.5.1/dist/index.iife.min.js"></script>
+    <script src="https://unpkg.com/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>לחץ על הכפתור כדי ליצור מסמך Word</h1>
+    <button id="generateDocButton">צור מסמך DOCX</button>
+    <p>המסמך ייווצר ויורד אוטומטית למחשב שלך.</p>
+    <a href="https://gemini.google.com/app/a8dc9c98eaad6262">gemini.google</a>
+    
+    <script>
+        // שימוש באובייקטים של הספרייה
+        const { Document, Packer, Paragraph, TextRun } = docx;
+
+        // מקבלים את הכפתור מה-HTML
+        const button = document.getElementById("generateDocButton");
+
+        // מוסיפים אירוע לחיצה לכפתור
+        button.addEventListener("click", () => {
+            // יצירת מסמך חדש
+            const doc = new Document({
+                sections: [
+                    {
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new TextRun({
+                                        text: "שלום עולם!",
+                                        bold: true,
+                                    }),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun("זהו מסמך Word פשוט שנוצר באמצעות JavaScript בדפדפן."),
+                                ],
+                            }),
+                            new Paragraph({
+                                children: [
+                                    new TextRun("תוכלו להוסיף כאן טקסט, תמונות, טבלאות ועוד בעזרת ה-API של החבילה."),
+                                ],
+                            }),
+                        ],
+                    },
+                ],
+            });
+
+            // אריזת המסמך כקובץ
+            Packer.toBlob(doc).then((blob) => {
+                // שמירת הקובץ בשם "my-document.docx"
+                saveAs(blob, "my-document.docx");
+                console.log("המסמך נוצר בהצלחה!");
+            });
+        });
+    </script>
+
+</body>
+</html>
